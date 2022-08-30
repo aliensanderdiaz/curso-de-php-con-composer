@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+<title>Curso de PHP con Composer</title>
+</head>
+
+<body>
+<header class="text-center">
+<h1>Curso de PHP con Composer</h1>
+</header>
+<main class="container">
+<hr>
+
+<section class="row">
+  <article class="col">
+    <h2>Sección 1 de 19 - Herramientas para seguir el curso</h2>
+    
+  </article>
+</section>
+
+<hr>
+
+<section class="row">
+  <article class="col">
+    <h2>Sección 2 de 19 - Qué aprenderás sobre PHP con Composer</h2>
+    
+  </article>
+</section>
+
+<hr>
+
+<section class="row">
+  <article class="col">
+    <h2>Sección 3 de 19 - Instalación de herramientas: XAMPP, Composer y GIT</h2>
+    
+  </article>
+</section>
+
+<hr>
+
+<section class="row">
+  <article class="col">
+    <h2>Sección 4 de 19 - Ser programador</h2>
+    
+  </article>
+</section>
+
+<hr>
+
+<section class="row">
+  <article class="col">
+    <h2>Sección 5 de 19 - El mundo del desarrollo web</h2>
+    
+  </article>
+</section>
+
+<hr>
+
+<section class="row">
+  <article class="col">
+    <h2>Sección 6 de 19 - Introducción a PHP</h2>
+    
+  </article>
+</section>
+
+<hr>
+
+<section class="row">
+  <article class="col">
+    <h2>Sección 7 de 19 - Sintaxis básica de PHP: asignación y aritmética</h2>
+    
+  </article>
+</section>
+
+<hr>
+
+<section class="row">
+  <article class="col">
+    <h2>Sección 8 de 19 - Sintaxis básica de PHP: comparación y variables</h2>
+    
+  </article>
+</section>
+
+<hr>
+
+<section class="row">
+  <article class="col">
+    <h2>Sección 9 de 19 - Bloques de códigos sencillos en PHP</h2>
+    
+  </article>
+</section>
+
+<hr>
+
+<section class="row">
+  <article class="col">
+    <h2>Sección 10 de 19 - Composer</h2>
+    <p>Creamos composer.json</p>
+    <pre class="prettyprint">
+            
+        {
+            "name": "aliensanderdiaz/text",
+            "autoload": {
+                "psr-4": {
+                    "Text\\": "src/"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            }
+        }
+    </pre>
+    <p>
+        creo la carpeta src
+        <br>
+        creo el archivo src/helpers.php
+        <br>
+        creo la clase Format.php
+    </p>
+    <pre class="prettyprint">
+            
+        &lt?php
+
+        namespace Text;
+        
+        class Format
+        {
+            public static function upperText($value)
+            {
+                return strtoupper($value);
+            }
+        }
+    </pre>
+    <p>
+        ejecuto en la terminal
+    </p>
+    <pre class="prettyprint">
+            
+        > composer dump
+    </pre>
+    <p>
+        Esto me crea la carpeta vendor
+    </p>
+    <p>
+        creo el archivo index.php
+    </p>
+    <pre class="prettyprint">
+            
+        &lt?php
+
+        require __DIR__ . '/vendor/autoload.php';
+        
+        // echo Text\Format::upperText("camila");
+        echo upper('Cami');
+    </pre>
+    <p>La linea comentada es como se haria hasta el momento, pero es algo demasiado largo para algo tan sencillo.
+        <br>
+        entonces para ello usaremos el archivo helpers.php
+    </p>
+    <pre class="prettyprint">
+            
+        &lt?php
+
+        function upper($value) {
+            return Text\Format::upperText($value);
+        }
+    </pre>
+  </article>
+</section>
+
+<hr>
+
+<section class="row">
+  <article class="col">
+    <h2>Sección 11 de 19 - Revisión del proyecto</h2>
+    <p>Agregamos otro metodo a nuestra clase</p>
+    <pre class="prettyprint">
+            
+      &lt?php
+
+      namespace Text;
+      
+      class Format
+      {
+          public static function upperText($value)
+          {
+              return strtoupper($value);
+          }
+          public static function lowerText($value)
+          {
+              return strtolower($value);
+          }
+      }
+      
+    </pre>  
+    <p>Creamos el respectivo helper</p>
+    <p><b>NOTA: </b>Agregamos una comprobación a cada función para evitar duplicidad de funciones (duplicar funciones es un error fatal)</p>
+    <pre class="prettyprint">
+            
+      &lt?php
+
+      if (!function_exists('upper')) {
+          function upper($value)
+          {
+              return Text\Format::upperText($value);
+          }
+      }
+      
+      if (!function_exists('lower')) {
+          function lower($value)
+          {
+              return Text\Format::lowerText($value);
+          }
+      }
+      
+    </pre>
+
+    <p>Lo utilizamos en el index</p>
+
+    <pre class="prettyprint">
+            
+      &lt?php
+
+      require __DIR__ . '/vendor/autoload.php';
+      
+      // echo Text\Format::upperText("camila");
+      echo upper('Cami');
+      echo '&ltbr>';
+      echo lower('Cami');
+      
+    </pre>
+  </article>
+</section>
+
+<hr>
+
+<section class="row">
+  <article class="col">
+    <h2>Sección 12 de 19 - Gestión de paquetes PHP</h2>
+    <p>
+      <a href="https://getcomposer.org/">https://getcomposer.org/</a>
+      <br>
+      <a href="https://packagist.org/">https://packagist.org/</a>
+    </p>
+    <pre class="prettyprint">
+            
+      composer require laravel/framework
+      composer require --dev phpunit/phpunit
+      composer require nesbot/carbon
+    </pre>
+  </article>
+</section>
+
+<hr>
+
+<section class="row">
+  <article class="col">
+    <h2>Sección 13 de 19 - Cómo iniciar un proyecto</h2>
+    <pre class="prettyprint">
+            
+      > composer init
+      // Nos hace una serie de preguntas.
+      > composer install // por lo general instala las depedencias de una vez, pero... si no, así se instala
+    </pre>
+  </article>
+</section>
+
+<hr>
+
+<section class="row">
+  <article class="col">
+    <h2>Sección 14 de 19 - Introducción a JSON</h2>
+    
+  </article>
+</section>
+
+<hr>
+
+<section class="row">
+  <article class="col">
+    <h2>Sección 15 de 19 - autoload</h2>
+    
+  </article>
+</section>
+
+<hr>
+
+<section class="row">
+  <article class="col">
+    <h2>Sección 16 de 19 - Comandos de Composer</h2>
+    <pre class="prettyprint">
+            
+      > composer
+      > composer dump
+      > composer require phpunit/phpunit // phpunit es un paquete de ejemplo
+      > composer remove phpunit/phpunit // phpunit es un paquete de ejemplo
+      > composer install
+    </pre>
+  </article>
+</section>
+
+<hr>
+
+<section class="row">
+  <article class="col">
+    <h2>Sección 17 de 19 - composer.lock</h2>
+    
+  </article>
+</section>
+
+<hr>
+
+<section class="row">
+  <article class="col">
+    <h2>Sección 18 de 19 - Ejercicios y retos para seguir practicando</h2>
+    
+  </article>
+</section>
+
+<hr>
+
+<section class="row">
+  <article class="col">
+    <h2>Sección 19 de 19 - Resumen final</h2>
+    
+  </article>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+</main>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</body>
+
+</html>
